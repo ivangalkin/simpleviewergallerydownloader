@@ -6,22 +6,20 @@
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" ref="image" />
 			</xs:sequence>
-			<xs:attribute name="backgroundImagePath" use="required" />
-			<xs:attribute name="enableRightClickOpen" use="required"
-				type="xs:boolean" />
-			<xs:attribute name="frameColor" use="required" type="xs:NMTOKEN" />
-			<xs:attribute name="frameWidth" use="required" type="xs:integer" />
+			<xs:attribute name="backgroundImagePath" />
+			<xs:attribute name="enableRightClickOpen" type="xs:boolean" />
+			<xs:attribute name="frameColor" type="xs:NMTOKEN" />
+			<xs:attribute name="frameWidth" type="xs:integer" />
 			<xs:attribute name="imagePath" use="required" />
-			<xs:attribute name="maxImageHeight" use="required" type="xs:integer" />
-			<xs:attribute name="maxImageWidth" use="required" type="xs:integer" />
-			<xs:attribute name="navPosition" use="required" type="xs:NCName" />
-			<xs:attribute name="stagePadding" use="required" type="xs:integer" />
-			<xs:attribute name="textColor" use="required" type="xs:NMTOKEN" />
-			<xs:attribute name="thumbPath" use="required" />
-			<xs:attribute name="thumbnailColumns" use="required"
-				type="xs:integer" />
-			<xs:attribute name="thumbnailRows" use="required" type="xs:integer" />
-			<xs:attribute name="title" use="required" />
+			<xs:attribute name="maxImageHeight" type="xs:integer" />
+			<xs:attribute name="maxImageWidth" type="xs:integer" />
+			<xs:attribute name="navPosition" type="xs:NCName" />
+			<xs:attribute name="stagePadding" type="xs:integer" />
+			<xs:attribute name="textColor" type="xs:NMTOKEN" />
+			<xs:attribute name="thumbPath" />
+			<xs:attribute name="thumbnailColumns" type="xs:integer" />
+			<xs:attribute name="thumbnailRows" type="xs:integer" />
+			<xs:attribute name="title" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="image">
