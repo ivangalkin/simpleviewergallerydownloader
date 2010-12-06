@@ -13,8 +13,6 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.simpleviewergallerydownloader.schema.Image;
 import org.simpleviewergallerydownloader.schema.SimpleviewerGallery;
@@ -35,8 +33,9 @@ public class Downloader {
 	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
 	private static final String SCHEMA_PACKAGE = "org.simpleviewergallerydownloader.schema";
-	private static final String GALLERY_SCHEMA = "gallery.xsd";
-	private static final String XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
+	// private static final String GALLERY_SCHEMA = "gallery.xsd";
+	// private static final String XML_SCHEMA =
+	// "http://www.w3.org/2001/XMLSchema";
 	private static final String SLASH = "/";
 
 	private IDownloaderListener listener = null;
@@ -93,7 +92,7 @@ public class Downloader {
 		} catch (SAXException e) {
 			listener.onDownloadingError("Unable to initialize XML parsing");
 		} catch (JAXBException e) {
-			listener.onDownloadingError("Unable to initialize XML parsing");
+			listener.onDownloadingError("Unable to parse XML");
 		}
 	}
 
@@ -165,7 +164,7 @@ public class Downloader {
 	 */
 	private String getImagePath(SimpleviewerGallery gallery) {
 		String imagePath = gallery.getImagePath();
-		if (!imagePath.endsWith(SLASH)) {
+		if (!imagePath.isEmpty() && !imagePath.endsWith(SLASH)) {
 			imagePath = imagePath.concat(SLASH);
 		}
 		return imagePath;
@@ -182,12 +181,13 @@ public class Downloader {
 	 */
 	private SimpleviewerGallery getGalleryImages(URL xmlUrl)
 			throws SAXException, JAXBException {
-		SchemaFactory sf = SchemaFactory.newInstance(XML_SCHEMA);
-		URL schemaURL = Downloader.class.getResource(GALLERY_SCHEMA);
-		Schema schema = sf.newSchema(schemaURL);
+
 		JAXBContext jaxbContext = JAXBContext.newInstance(SCHEMA_PACKAGE);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		unmarshaller.setSchema(schema);
+		// SchemaFactory sf = SchemaFactory.newInstance(XML_SCHEMA);
+		// URL schemaURL = Downloader.class.getResource(GALLERY_SCHEMA);
+		// Schema schema = sf.newSchema(schemaURL);
+		// unmarshaller.setSchema(schema);
 		SimpleviewerGallery gallery = (SimpleviewerGallery) unmarshaller
 				.unmarshal(xmlUrl);
 		return gallery;
