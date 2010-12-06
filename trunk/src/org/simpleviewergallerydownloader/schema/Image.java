@@ -45,7 +45,7 @@ public class Image {
 
     @XmlElement(required = true)
     protected String filename;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     protected String caption;
 
     /**

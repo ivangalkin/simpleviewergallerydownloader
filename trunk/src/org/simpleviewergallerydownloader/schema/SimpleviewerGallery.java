@@ -5,7 +5,6 @@
 // Generated on: 2010.12.05 at 08:21:42 PM MEZ 
 //
 
-
 package org.simpleviewergallerydownloader.schema;
 
 import java.math.BigInteger;
@@ -21,11 +20,13 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -56,408 +57,367 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "image"
-})
+@XmlType(name = "", propOrder = { "image" })
 @XmlRootElement(name = "simpleviewerGallery")
 public class SimpleviewerGallery {
 
-    @XmlElement(required = true)
-    protected List<Image> image;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anySimpleType")
-    protected String backgroundImagePath;
-    @XmlAttribute(required = true)
-    protected boolean enableRightClickOpen;
-    @XmlAttribute(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "NMTOKEN")
-    protected String frameColor;
-    @XmlAttribute(required = true)
-    protected BigInteger frameWidth;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anySimpleType")
-    protected String imagePath;
-    @XmlAttribute(required = true)
-    protected BigInteger maxImageHeight;
-    @XmlAttribute(required = true)
-    protected BigInteger maxImageWidth;
-    @XmlAttribute(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "NCName")
-    protected String navPosition;
-    @XmlAttribute(required = true)
-    protected BigInteger stagePadding;
-    @XmlAttribute(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "NMTOKEN")
-    protected String textColor;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anySimpleType")
-    protected String thumbPath;
-    @XmlAttribute(required = true)
-    protected BigInteger thumbnailColumns;
-    @XmlAttribute(required = true)
-    protected BigInteger thumbnailRows;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anySimpleType")
-    protected String title;
+	@XmlElement(required = true)
+	protected List<Image> image;
+	@XmlAttribute(required = false)
+	@XmlSchemaType(name = "anySimpleType")
+	protected String backgroundImagePath;
+	@XmlAttribute(required = false)
+	protected boolean enableRightClickOpen;
+	@XmlAttribute(required = false)
+	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+	@XmlSchemaType(name = "NMTOKEN")
+	protected String frameColor;
+	@XmlAttribute(required = false)
+	protected BigInteger frameWidth;
+	@XmlAttribute(required = true)
+	@XmlSchemaType(name = "anySimpleType")
+	protected String imagePath;
+	@XmlAttribute(required = false)
+	protected BigInteger maxImageHeight;
+	@XmlAttribute(required = false)
+	protected BigInteger maxImageWidth;
+	@XmlAttribute(required = false)
+	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+	@XmlSchemaType(name = "NCName")
+	protected String navPosition;
+	@XmlAttribute(required = false)
+	protected BigInteger stagePadding;
+	@XmlAttribute(required = false)
+	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+	@XmlSchemaType(name = "NMTOKEN")
+	protected String textColor;
+	@XmlAttribute(required = false)
+	@XmlSchemaType(name = "anySimpleType")
+	protected String thumbPath;
+	@XmlAttribute(required = false)
+	protected BigInteger thumbnailColumns;
+	@XmlAttribute(required = false)
+	protected BigInteger thumbnailRows;
+	@XmlAttribute(required = false)
+	@XmlSchemaType(name = "anySimpleType")
+	protected String title;
 
-    /**
-     * Gets the value of the image property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the image property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getImage().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Image }
-     * 
-     * 
-     */
-    public List<Image> getImage() {
-        if (image == null) {
-            image = new ArrayList<Image>();
-        }
-        return this.image;
-    }
+	/**
+	 * Gets the value of the image property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the image property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getImage().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Image }
+	 * 
+	 * 
+	 */
+	public List<Image> getImage() {
+		if (image == null) {
+			image = new ArrayList<Image>();
+		}
+		return this.image;
+	}
 
-    /**
-     * Gets the value of the backgroundImagePath property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBackgroundImagePath() {
-        return backgroundImagePath;
-    }
+	/**
+	 * Gets the value of the backgroundImagePath property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getBackgroundImagePath() {
+		return backgroundImagePath;
+	}
 
-    /**
-     * Sets the value of the backgroundImagePath property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBackgroundImagePath(String value) {
-        this.backgroundImagePath = value;
-    }
+	/**
+	 * Sets the value of the backgroundImagePath property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setBackgroundImagePath(String value) {
+		this.backgroundImagePath = value;
+	}
 
-    /**
-     * Gets the value of the enableRightClickOpen property.
-     * 
-     */
-    public boolean isEnableRightClickOpen() {
-        return enableRightClickOpen;
-    }
+	/**
+	 * Gets the value of the enableRightClickOpen property.
+	 * 
+	 */
+	public boolean isEnableRightClickOpen() {
+		return enableRightClickOpen;
+	}
 
-    /**
-     * Sets the value of the enableRightClickOpen property.
-     * 
-     */
-    public void setEnableRightClickOpen(boolean value) {
-        this.enableRightClickOpen = value;
-    }
+	/**
+	 * Sets the value of the enableRightClickOpen property.
+	 * 
+	 */
+	public void setEnableRightClickOpen(boolean value) {
+		this.enableRightClickOpen = value;
+	}
 
-    /**
-     * Gets the value of the frameColor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFrameColor() {
-        return frameColor;
-    }
+	/**
+	 * Gets the value of the frameColor property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getFrameColor() {
+		return frameColor;
+	}
 
-    /**
-     * Sets the value of the frameColor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFrameColor(String value) {
-        this.frameColor = value;
-    }
+	/**
+	 * Sets the value of the frameColor property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setFrameColor(String value) {
+		this.frameColor = value;
+	}
 
-    /**
-     * Gets the value of the frameWidth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getFrameWidth() {
-        return frameWidth;
-    }
+	/**
+	 * Gets the value of the frameWidth property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getFrameWidth() {
+		return frameWidth;
+	}
 
-    /**
-     * Sets the value of the frameWidth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setFrameWidth(BigInteger value) {
-        this.frameWidth = value;
-    }
+	/**
+	 * Sets the value of the frameWidth property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setFrameWidth(BigInteger value) {
+		this.frameWidth = value;
+	}
 
-    /**
-     * Gets the value of the imagePath property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getImagePath() {
-        return imagePath;
-    }
+	/**
+	 * Gets the value of the imagePath property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getImagePath() {
+		return imagePath;
+	}
 
-    /**
-     * Sets the value of the imagePath property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setImagePath(String value) {
-        this.imagePath = value;
-    }
+	/**
+	 * Sets the value of the imagePath property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setImagePath(String value) {
+		this.imagePath = value;
+	}
 
-    /**
-     * Gets the value of the maxImageHeight property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getMaxImageHeight() {
-        return maxImageHeight;
-    }
+	/**
+	 * Gets the value of the maxImageHeight property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getMaxImageHeight() {
+		return maxImageHeight;
+	}
 
-    /**
-     * Sets the value of the maxImageHeight property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setMaxImageHeight(BigInteger value) {
-        this.maxImageHeight = value;
-    }
+	/**
+	 * Sets the value of the maxImageHeight property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setMaxImageHeight(BigInteger value) {
+		this.maxImageHeight = value;
+	}
 
-    /**
-     * Gets the value of the maxImageWidth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getMaxImageWidth() {
-        return maxImageWidth;
-    }
+	/**
+	 * Gets the value of the maxImageWidth property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getMaxImageWidth() {
+		return maxImageWidth;
+	}
 
-    /**
-     * Sets the value of the maxImageWidth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setMaxImageWidth(BigInteger value) {
-        this.maxImageWidth = value;
-    }
+	/**
+	 * Sets the value of the maxImageWidth property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setMaxImageWidth(BigInteger value) {
+		this.maxImageWidth = value;
+	}
 
-    /**
-     * Gets the value of the navPosition property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNavPosition() {
-        return navPosition;
-    }
+	/**
+	 * Gets the value of the navPosition property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getNavPosition() {
+		return navPosition;
+	}
 
-    /**
-     * Sets the value of the navPosition property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNavPosition(String value) {
-        this.navPosition = value;
-    }
+	/**
+	 * Sets the value of the navPosition property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setNavPosition(String value) {
+		this.navPosition = value;
+	}
 
-    /**
-     * Gets the value of the stagePadding property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getStagePadding() {
-        return stagePadding;
-    }
+	/**
+	 * Gets the value of the stagePadding property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getStagePadding() {
+		return stagePadding;
+	}
 
-    /**
-     * Sets the value of the stagePadding property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setStagePadding(BigInteger value) {
-        this.stagePadding = value;
-    }
+	/**
+	 * Sets the value of the stagePadding property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setStagePadding(BigInteger value) {
+		this.stagePadding = value;
+	}
 
-    /**
-     * Gets the value of the textColor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTextColor() {
-        return textColor;
-    }
+	/**
+	 * Gets the value of the textColor property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTextColor() {
+		return textColor;
+	}
 
-    /**
-     * Sets the value of the textColor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTextColor(String value) {
-        this.textColor = value;
-    }
+	/**
+	 * Sets the value of the textColor property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setTextColor(String value) {
+		this.textColor = value;
+	}
 
-    /**
-     * Gets the value of the thumbPath property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getThumbPath() {
-        return thumbPath;
-    }
+	/**
+	 * Gets the value of the thumbPath property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getThumbPath() {
+		return thumbPath;
+	}
 
-    /**
-     * Sets the value of the thumbPath property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setThumbPath(String value) {
-        this.thumbPath = value;
-    }
+	/**
+	 * Sets the value of the thumbPath property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setThumbPath(String value) {
+		this.thumbPath = value;
+	}
 
-    /**
-     * Gets the value of the thumbnailColumns property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getThumbnailColumns() {
-        return thumbnailColumns;
-    }
+	/**
+	 * Gets the value of the thumbnailColumns property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getThumbnailColumns() {
+		return thumbnailColumns;
+	}
 
-    /**
-     * Sets the value of the thumbnailColumns property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setThumbnailColumns(BigInteger value) {
-        this.thumbnailColumns = value;
-    }
+	/**
+	 * Sets the value of the thumbnailColumns property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setThumbnailColumns(BigInteger value) {
+		this.thumbnailColumns = value;
+	}
 
-    /**
-     * Gets the value of the thumbnailRows property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getThumbnailRows() {
-        return thumbnailRows;
-    }
+	/**
+	 * Gets the value of the thumbnailRows property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getThumbnailRows() {
+		return thumbnailRows;
+	}
 
-    /**
-     * Sets the value of the thumbnailRows property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setThumbnailRows(BigInteger value) {
-        this.thumbnailRows = value;
-    }
+	/**
+	 * Sets the value of the thumbnailRows property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setThumbnailRows(BigInteger value) {
+		this.thumbnailRows = value;
+	}
 
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTitle() {
-        return title;
-    }
+	/**
+	 * Gets the value of the title property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTitle() {
+		return title;
+	}
 
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTitle(String value) {
-        this.title = value;
-    }
+	/**
+	 * Sets the value of the title property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setTitle(String value) {
+		this.title = value;
+	}
 
 }
