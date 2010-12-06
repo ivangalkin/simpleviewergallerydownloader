@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="SimpleviewerGalleryDownloader">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+	<path id="SimpleviewerGalleryDownloader.classpath">
+		<pathelement location="bin" />
+		<pathelement location="miglayout15-swing.jar" />
+	</path>
+
+	<target name="init">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean">
+		<delete dir="bin" />
+	</target>
+
+
+	<target depends="init" name="build">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="SimpleviewerGalleryDownloader.classpath" />
+		</javac>
+	</target>
+
+	<target depends="build" name="package">
+		<jar destfile="/home/ivan.galkin/workspace/SimpleviewerGalleryDownloader/build/SVGDownloader-0.1.jar" filesetmanifest="mergewithoutmain">
+			<manifest>
+				<attribute name="Main-Class" value="org.simpleviewergallerydownloader.Main" />
+				<attribute name="Class-Path" value="." />
+			</manifest>
+			<fileset dir="/home/ivan.galkin/workspace/SimpleviewerGalleryDownloader/bin" />
+			<zipfileset excludes="META-INF/*.SF" src="/home/ivan.galkin/workspace/SimpleviewerGalleryDownloader/miglayout15-swing.jar" />
+		</jar>
+	</target>
+
+	<target name="Main">
+		<java classname="org.simpleviewergallerydownloader.Main" failonerror="true" fork="yes">
+			<classpath refid="SimpleviewerGalleryDownloader.classpath" />
+		</java>
+	</target>
+</project>
