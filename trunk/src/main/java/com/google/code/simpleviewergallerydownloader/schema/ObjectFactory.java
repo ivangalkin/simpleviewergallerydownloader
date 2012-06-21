@@ -6,7 +6,7 @@
 //
 
 
-package org.simpleviewergallerydownloader.schema;
+package com.google.code.simpleviewergallerydownloader.schema;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
