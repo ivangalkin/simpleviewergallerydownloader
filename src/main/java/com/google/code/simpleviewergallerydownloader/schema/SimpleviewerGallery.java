@@ -5,7 +5,7 @@
 // Generated on: 2010.12.05 at 08:21:42 PM MEZ 
 //
 
-package org.simpleviewergallerydownloader.schema;
+package com.google.code.simpleviewergallerydownloader.schema;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

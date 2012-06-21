@@ -1,4 +1,4 @@
-package org.simpleviewergallerydownloader;
+package com.google.code.simpleviewergallerydownloader;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

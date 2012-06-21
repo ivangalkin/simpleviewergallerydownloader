@@ -1,4 +1,4 @@
-package org.simpleviewergallerydownloader;
+package com.google.code.simpleviewergallerydownloader;
 
 /**
  * Listener for {@link Downloader}'s events
