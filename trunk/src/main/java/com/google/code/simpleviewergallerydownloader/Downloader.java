@@ -5,18 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.google.code.simpleviewergallerydownloader.DownloaderXMLParser.DownloaderParseException;
 import com.google.code.simpleviewergallerydownloader.IDownloaderTransport.DownloaderTransportException;
@@ -33,8 +28,6 @@ import com.google.code.simpleviewergallerydownloader.schema.SimpleviewerGallery;
  */
 public class Downloader {
 
-	private static final String SLASH = "/";
-
 	private IDownloaderListener listener = null;
 
 	private IDownloaderTransport transport = null;
@@ -49,6 +42,11 @@ public class Downloader {
 	 */
 	public Downloader(URL xmlUrl, File downloadDirectory,
 			IDownloaderListener listener) {
+		this(xmlUrl, downloadDirectory, null, null, listener);
+	}
+
+	public Downloader(URL xmlUrl, File downloadDirectory, String username,
+			String password, IDownloaderListener listener) {
 
 		if (xmlUrl == null || downloadDirectory == null || listener == null) {
 			throw new IllegalArgumentException(
@@ -56,13 +54,15 @@ public class Downloader {
 		}
 
 		this.listener = listener;
-		this.transport = new SimpleDownloaderTransport();
+		this.transport = (username == null || password == null) ? new SimpleDownloaderTransport()
+				: new HttpDownloaderTransport(username, password);
 
 		InputStream xmlContent = null;
 		try {
 			xmlContent = transport.download(xmlUrl);
 		} catch (DownloaderTransportException e) {
-			this.listener.onDownloadingError("Unable to download XML file");
+			this.listener.onDownloadingError("Unable to download XML file: "
+					+ ExceptionUtils.getMessage(e));
 			return;
 		}
 		SimpleviewerGallery gallery = null;
@@ -70,12 +70,13 @@ public class Downloader {
 			gallery = new DownloaderXMLParser()
 					.getSimpleviewerGallery(xmlContent);
 		} catch (DownloaderParseException e1) {
-			listener.onDownloadingError("Unable to parse XML");
+			listener.onDownloadingError("Unable to parse XML: "
+					+ ExceptionUtils.getMessage(e1));
 			return;
 		}
 
 		String urlPath = getGaleryPath(xmlUrl);
-		String imagePath = getImagePath(gallery);
+		String imagePath = gallery.getImagePath();
 		List<Image> images = gallery.getImage();
 
 		if (images == null || images.size() == 0) {
@@ -104,38 +105,6 @@ public class Downloader {
 	}
 
 	/**
-	 * 
-	 * @param parts
-	 *            parts, which we build an URL from
-	 * @return
-	 * @throws MalformedURLException
-	 * @throws UnsupportedEncodingException
-	 * @throws URISyntaxException
-	 */
-	private URL joinURL(String... parts) throws MalformedURLException,
-			UnsupportedEncodingException, URISyntaxException {
-		List<String> partsList = new LinkedList<String>();
-		for (int i = 0; i < parts.length; i++) {
-			String part = StringUtils.removeEnd(parts[i], SLASH);
-			// assume the first part is a valid URL
-			// partsList.add((i == 0) ? part : URLEncoder.encode(part,
-			// "UTF-8"));
-			partsList.add(part);
-		}
-		String joined = StringUtils.join(partsList, SLASH);
-
-		String decodedURL = URLDecoder.decode(joined, "UTF-8");
-		URL url = new URL(decodedURL);
-		URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(),
-				url.getPort(), url.getPath(), url.getQuery(), url.getRef());
-		System.out.println(uri.toASCIIString());
-		return uri.toURL();
-
-		// System.out.println(joined);
-		// return new URL(joined);
-	}
-
-	/**
 	 * Check if argument imagePath relative or absolute is. If relative build
 	 * image URL from base link
 	 * 
@@ -151,31 +120,34 @@ public class Downloader {
 		if (imagePath == null || imagePath.isEmpty()) {
 			try {
 				// 1. image path is not given, filename is relative to urlPath
-				URL url = joinURL(urlPath, image.getFilename());
+				URL url = DownloaderUtils.getURL(urlPath, image.getFilename());
 				imageUrls.add(url);
-			} catch (Exception e) {
+			} catch (MalformedURLException e) {
 			}
 
 			try {
 				// 2. image path is not given, filename is relative to default
 				// forlder "images"
-				URL url = joinURL(urlPath, "images", image.getFilename());
+				URL url = DownloaderUtils.getURL(urlPath, "images", image
+						.getFilename());
 				imageUrls.add(url);
-			} catch (Exception e) {
+			} catch (MalformedURLException e) {
 			}
 		} else {
 			try {
 				// 3. image path is given, it is relative
-				URL url = joinURL(urlPath, imagePath, image.getFilename());
+				URL url = DownloaderUtils.getURL(urlPath, imagePath, image
+						.getFilename());
 				imageUrls.add(url);
-			} catch (Exception e) {
+			} catch (MalformedURLException e) {
 			}
 
 			try {
 				// 4. image path is given, it is absolute
-				URL url = joinURL(imagePath, image.getFilename());
+				URL url = DownloaderUtils
+						.getURL(imagePath, image.getFilename());
 				imageUrls.add(url);
-			} catch (Exception e) {
+			} catch (MalformedURLException e) {
 			}
 		}
 
@@ -212,7 +184,8 @@ public class Downloader {
 			fileOutputStream = new FileOutputStream(outputFile);
 		} catch (FileNotFoundException e) {
 			this.listener.onDownloadingError("Unable to create output file "
-					+ outputFile.getAbsolutePath());
+					+ outputFile.getAbsolutePath() + ": "
+					+ ExceptionUtils.getMessage(e));
 			IOUtils.closeQuietly(fileOutputStream);
 			return;
 		}
@@ -223,24 +196,11 @@ public class Downloader {
 			e.printStackTrace();
 			this.listener.onDownloadingError("Error during reading from "
 					+ properURL + " or writing to "
-					+ outputFile.getAbsolutePath());
+					+ outputFile.getAbsolutePath() + ": "
+					+ ExceptionUtils.getMessage(e));
 			IOUtils.closeQuietly(imageInputSteam);
 			IOUtils.closeQuietly(fileOutputStream);
 		}
-	}
-
-	/**
-	 * Extract path to images directory
-	 * 
-	 * @param gallery
-	 * @return
-	 */
-	private String getImagePath(SimpleviewerGallery gallery) {
-		String imagePath = gallery.getImagePath();
-		// if (!imagePath.isEmpty() && !imagePath.endsWith(SLASH)) {
-		// imagePath = imagePath.concat(SLASH);
-		// }
-		return imagePath;
 	}
 
 	/**
@@ -258,10 +218,6 @@ public class Downloader {
 		int filePosition = urlRepresentation.lastIndexOf(file.getName());
 
 		String path = urlRepresentation.substring(0, filePosition);
-
-		// if (!path.endsWith(SLASH)) {
-		// path = path.concat(SLASH);
-		// }
 
 		return path;
 	}
