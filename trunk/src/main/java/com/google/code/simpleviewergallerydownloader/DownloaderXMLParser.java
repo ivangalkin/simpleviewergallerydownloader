@@ -5,6 +5,10 @@ import java.io.InputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.util.StreamReaderDelegate;
 
 import org.xml.sax.SAXException;
 
@@ -40,16 +44,48 @@ public class DownloaderXMLParser {
 
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(SCHEMA_PACKAGE);
+
+			XMLInputFactory xif = XMLInputFactory.newInstance();
+			XMLStreamReader xsr = xif.createXMLStreamReader(xmlContent);
+			xsr = new MyStreamReaderDelegate(xsr);
+
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			// SchemaFactory sf = SchemaFactory.newInstance(XML_SCHEMA);
 			// URL schemaURL = Downloader.class.getResource(GALLERY_SCHEMA);
 			// Schema schema = sf.newSchema(schemaURL);
 			// unmarshaller.setSchema(schema);
+
 			SimpleviewerGallery gallery = (SimpleviewerGallery) unmarshaller
-					.unmarshal(xmlContent);
+					.unmarshal(xsr);
 			return gallery;
 		} catch (JAXBException e) {
 			throw new DownloaderParseException(e);
+		} catch (XMLStreamException e) {
+			throw new DownloaderParseException(e);
 		}
+	}
+
+	/**
+	 * Additional robustness against case sensitive tags and attributes
+	 * 
+	 * @author ivangalkin
+	 * @see {@link http
+	 *      ://blog.bdoughan.com/2010/12/case-insensitive-unmarshalling.html}
+	 */
+	private static class MyStreamReaderDelegate extends StreamReaderDelegate {
+		public MyStreamReaderDelegate(XMLStreamReader xsr) {
+			super(xsr);
+		}
+
+		@Override
+		public String getAttributeLocalName(int index) {
+			return super.getAttributeLocalName(index).toLowerCase();
+		}
+
+		@Override
+		public String getLocalName() {
+			return super.getLocalName().toLowerCase();
+		}
+
 	}
 }
