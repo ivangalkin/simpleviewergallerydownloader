@@ -10,6 +10,10 @@ public interface IDownloaderTransport {
 		public DownloaderTransportException(Throwable e) {
 			super(e);
 		}
+
+		public DownloaderTransportException(String msg) {
+			super(msg);
+		}
 	}
 
 	public InputStream download(URL url) throws DownloaderTransportException;

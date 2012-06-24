@@ -8,9 +8,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,6 +22,12 @@ import javax.swing.event.DocumentListener;
 
 import net.miginfocom.swing.MigLayout;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+
 /**
  * Simple UI for {@link Downloader}
  * 
@@ -28,6 +36,10 @@ import net.miginfocom.swing.MigLayout;
  */
 public class SwingUI extends JPanel implements DocumentListener,
 		IDownloaderListener {
+
+	private static final String PATH_HINT = "Directory where downloaded files will be stored in";
+
+	private static final String URL_HINT = "URL to Gallery's XML file. Please don't forget to input a protocol like 'http://' or 'file://'";
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,13 +52,18 @@ public class SwingUI extends JPanel implements DocumentListener,
 	private JLabel statusLabel;
 
 	private int totalPicturesCount = 0;
+	private JCheckBox chckbxProtectedGallery;
+	private JLabel lblUsername;
+	private JTextField usernameTextField;
+	private JLabel lblPassword;
+	private JTextField passwordTextField;
 
 	/**
 	 * Create the panel.
 	 */
 	public SwingUI() {
-		setLayout(new MigLayout("", "[228px,grow][100px]",
-				"[15px][][][][][][grow]"));
+		setLayout(new MigLayout("", "[300px,grow][100px]",
+				"[15px][][][][][][][][][][][120.00,grow]"));
 
 		JLabel urlTextFieldLabel = new JLabel(
 				"URL to Simpleviewer Gallery's XML");
@@ -59,8 +76,7 @@ public class SwingUI extends JPanel implements DocumentListener,
 		directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		urlTextField = new JTextField();
-		urlTextField
-				.setToolTipText("URL to Gallery's XML file. Please don't forget to input a protocol like 'http://' or 'file://'");
+		urlTextField.setToolTipText(URL_HINT);
 		urlTextField.getDocument().addDocumentListener(this);
 		urlTextFieldLabel.setLabelFor(urlTextField);
 		add(urlTextField, "cell 0 1,growx");
@@ -69,8 +85,7 @@ public class SwingUI extends JPanel implements DocumentListener,
 		add(pathTextFieldLabel, "cell 0 2");
 
 		pathTextField = new JTextField();
-		pathTextField
-				.setToolTipText("Directory where downloaded files will be stored in");
+		pathTextField.setToolTipText(PATH_HINT);
 		pathTextField.getDocument().addDocumentListener(this);
 		pathTextFieldLabel.setLabelFor(pathTextField);
 		add(pathTextField, "cell 0 3,growx");
@@ -87,11 +102,30 @@ public class SwingUI extends JPanel implements DocumentListener,
 			}
 		});
 		add(selectPathButton, "cell 1 3");
+
+		chckbxProtectedGallery = new JCheckBox("Protected gallery");
+		add(chckbxProtectedGallery, "cell 0 4");
+
+		lblUsername = new JLabel("Username");
+		add(lblUsername, "cell 0 5");
+
+		usernameTextField = new JTextField();
+		lblUsername.setLabelFor(usernameTextField);
+		add(usernameTextField, "cell 0 6,growx");
+		usernameTextField.setColumns(10);
+
+		lblPassword = new JLabel("Password");
+		add(lblPassword, "cell 0 7");
+
+		passwordTextField = new JPasswordField();
+		lblPassword.setLabelFor(passwordTextField);
+		add(passwordTextField, "cell 0 8,growx");
+		passwordTextField.setColumns(10);
 		progressBar = new JProgressBar();
-		add(progressBar, "cell 0 4,growx");
+		add(progressBar, "cell 0 9,growx");
 
 		statusLabel = new JLabel("");
-		add(statusLabel, "cell 1 4");
+		add(statusLabel, "cell 1 9");
 
 		downloadButton = new JButton("Download");
 		downloadButton.setEnabled(false);
@@ -100,13 +134,21 @@ public class SwingUI extends JPanel implements DocumentListener,
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					final URL xmlUrl = new URL(urlTextField.getText());
+					final URL xmlUrl = DownloaderUtils.getURL(urlTextField
+							.getText());
 					final File downloadDirectory = new File(pathTextField
 							.getText());
 					new Thread(new Runnable() {
 						public void run() {
-							new Downloader(xmlUrl, downloadDirectory,
-									SwingUI.this);
+							if (chckbxProtectedGallery.isSelected()) {
+								new Downloader(xmlUrl, downloadDirectory,
+										usernameTextField.getText(),
+										passwordTextField.getText(),
+										SwingUI.this);
+							} else {
+								new Downloader(xmlUrl, downloadDirectory,
+										SwingUI.this);
+							}
 						}
 					}).start();
 				} catch (MalformedURLException me) {
@@ -115,10 +157,12 @@ public class SwingUI extends JPanel implements DocumentListener,
 				}
 			}
 		});
-		add(downloadButton, "cell 0 5");
+		add(downloadButton, "cell 0 10");
 
 		loggingArea = new JTextArea();
-		add(new JScrollPane(loggingArea), "cell 0 6,grow");
+		loggingArea.setEditable(false);
+		add(new JScrollPane(loggingArea), "cell 0 11,grow");
+		initDataBindings();
 
 	}
 
@@ -127,11 +171,15 @@ public class SwingUI extends JPanel implements DocumentListener,
 		boolean pathOk = false;
 
 		try {
-			new URL(urlTextField.getText());
+			DownloaderUtils.getURL(urlTextField.getText());
 			urlTextField.setForeground(Color.BLACK);
+			urlTextField.setToolTipText(URL_HINT);
 			urlOk = true;
-		} catch (MalformedURLException e1) {
+		} catch (MalformedURLException e) {
 			urlTextField.setForeground(Color.RED);
+			urlTextField
+					.setToolTipText((urlTextField.getText().isEmpty()) ? URL_HINT
+							: ExceptionUtils.getMessage(e));
 		}
 
 		pathOk = !pathTextField.getText().isEmpty();
@@ -175,4 +223,21 @@ public class SwingUI extends JPanel implements DocumentListener,
 		progressBar.setMaximum(count);
 	}
 
+	protected void initDataBindings() {
+		BeanProperty<JCheckBox, Boolean> jCheckBoxBeanProperty = BeanProperty
+				.create("selected");
+		BeanProperty<JTextField, Boolean> jTextFieldBeanProperty = BeanProperty
+				.create("enabled");
+		AutoBinding<JCheckBox, Boolean, JTextField, Boolean> autoBinding = Bindings
+				.createAutoBinding(UpdateStrategy.READ, chckbxProtectedGallery,
+						jCheckBoxBeanProperty, usernameTextField,
+						jTextFieldBeanProperty, "UsernameEnabledBinding");
+		autoBinding.bind();
+		//
+		AutoBinding<JCheckBox, Boolean, JTextField, Boolean> autoBinding_1 = Bindings
+				.createAutoBinding(UpdateStrategy.READ, chckbxProtectedGallery,
+						jCheckBoxBeanProperty, passwordTextField,
+						jTextFieldBeanProperty, "PasswordEnabledBinding");
+		autoBinding_1.bind();
+	}
 }

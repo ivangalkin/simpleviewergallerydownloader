@@ -12,7 +12,16 @@ import javax.swing.JFrame;
  */
 public class Main {
 
-	private JFrame frame;
+	/**
+	 * Create the application.
+	 */
+	public Main() {
+		JFrame frame = new JFrame("Downloader for SimpleviewerGallery");
+		frame.setBounds(100, 100, 450, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(new SwingUI());
+		frame.setVisible(true);
+	}
 
 	/**
 	 * Launch the application.
@@ -21,30 +30,12 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main window = new Main();
-					window.frame.setContentPane(new SwingUI());
-					window.frame.setVisible(true);
+					new Main();
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException(e);
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public Main() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame("Downloader for SimpleviewerGallery");
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

@@ -12,7 +12,7 @@ import com.google.code.simpleviewergallerydownloader.schema.SimpleviewerGallery;
 
 public class TestDownloaderXMLParser {
 	@Test
-	public void testXMLParse1() throws DownloaderParseException {
+	public void testXMLParse0() throws DownloaderParseException {
 		InputStream is = TestDownloaderXMLParser.class
 				.getClassLoader()
 				.getResourceAsStream(
@@ -24,7 +24,7 @@ public class TestDownloaderXMLParser {
 	}
 	
 	@Test
-	public void testXMLParse2() throws DownloaderParseException {
+	public void testXMLParse1() throws DownloaderParseException {
 		InputStream is = TestDownloaderXMLParser.class
 				.getClassLoader()
 				.getResourceAsStream(
@@ -33,5 +33,17 @@ public class TestDownloaderXMLParser {
 		SimpleviewerGallery gallery = new DownloaderXMLParser()
 				.getSimpleviewerGallery(is);
 		assertEquals(23, gallery.getImage().size());
+	}
+	
+	@Test
+	public void testXMLParse2() throws DownloaderParseException {
+		InputStream is = TestDownloaderXMLParser.class
+				.getClassLoader()
+				.getResourceAsStream(
+						"com/google/code/simpleviewergallerydownloader/test/gallery2.xml");
+		assertNotNull(is);
+		SimpleviewerGallery gallery = new DownloaderXMLParser()
+				.getSimpleviewerGallery(is);
+		assertEquals(61, gallery.getImage().size());
 	}
 }
