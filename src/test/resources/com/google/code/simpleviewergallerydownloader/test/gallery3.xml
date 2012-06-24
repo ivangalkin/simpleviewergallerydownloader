@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+	
+		
+		
+		
+			
+		
+	
+	
+
+
+
+
+	<simpleviewergallery
+		
+		enableRightClickOpen="true"
+		
+		frameColor="0xdddddd"
+		frameWidth="0"
+		hAlign="center"
+		imagePath="slides/"
+		maxImageWidth="560"
+		maxImageHeight="560"
+		navPadding="20"
+		navPosition="left"
+		stagePadding="2"
+		textColor="0xcccccc"
+		title="&lt;font face=&quot;Tahoma, Arial, Helvetica, sans-serif&quot; size=&quot;20px&quot;&gt;BILDER"
+		thumbnailColumns="2"
+		thumbPath="thumbs/"
+		thumbnailRows="5"
+		vAlign="center">
+
+
+
+			<image>
+		
+		
+		
+				<filename>722.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+
+	
+		
+			<image>
+		
+		
+		
+				<filename>k1.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+		
+		
+	
+
+	
+		
+			<image>
+		
+		
+		
+				<filename>k2.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+		
+		
+	
+
+	
+		
+			<image>
+		
+		
+		
+				<filename>k3.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+		
+		
+	
+
+	
+		
+			<image>
+		
+		
+		
+				<filename>k5.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+		
+		
+	
+
+	
+		
+			<image>
+		
+		
+		
+				<filename>k7.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+		
+		
+	
+
+	
+		
+			<image>
+		
+		
+		
+				<filename>k8.jpg</filename>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<caption></caption>
+		
+		
+			</image>
+		
+		
+	
+
+	
+		
+			
+		
+
+		
+		
+		
+		
+		
+		
+		
+			</simpleviewergallery>

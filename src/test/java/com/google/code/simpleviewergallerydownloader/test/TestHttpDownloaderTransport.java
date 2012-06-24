@@ -39,7 +39,7 @@ public class TestHttpDownloaderTransport {
 	@Test
 	public void testDownloadFileMultipleTimes()
 			throws DownloaderTransportException, IOException {
-		int T = 10;
+		int T = 5;
 
 		IDownloaderTransport httpTransport = new HttpDownloaderTransport(
 				"test", "test");
@@ -66,7 +66,8 @@ public class TestHttpDownloaderTransport {
 	@Test
 	public void testDownloadFileMultipleTimesMultipleInstances()
 			throws DownloaderTransportException, IOException {
-		for (int i = 0; i < 10; i++) {
+		int T = 5;
+		for (int i = 0; i < T; i++) {
 			testDownloadFileMultipleTimes();
 		}
 	}

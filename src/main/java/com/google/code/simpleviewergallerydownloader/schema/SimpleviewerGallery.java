@@ -58,46 +58,46 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "image" })
-@XmlRootElement(name = "simpleviewerGallery")
+@XmlRootElement(name = "simpleviewergallery")
 public class SimpleviewerGallery {
 
 	@XmlElement(required = true)
 	protected List<Image> image;
 	@XmlAttribute(required = false)
 	@XmlSchemaType(name = "anySimpleType")
-	protected String backgroundImagePath;
+	protected String backgroundimagepath;
 	@XmlAttribute(required = false)
-	protected boolean enableRightClickOpen;
+	protected boolean enablerightclickopen;
 	@XmlAttribute(required = false)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlSchemaType(name = "NMTOKEN")
-	protected String frameColor;
+	protected String framecolor;
 	@XmlAttribute(required = false)
-	protected BigInteger frameWidth;
+	protected BigInteger framewidth;
 	@XmlAttribute(required = true)
 	@XmlSchemaType(name = "anySimpleType")
-	protected String imagePath;
+	protected String imagepath;
 	@XmlAttribute(required = false)
-	protected BigInteger maxImageHeight;
+	protected BigInteger maximageheight;
 	@XmlAttribute(required = false)
-	protected BigInteger maxImageWidth;
+	protected BigInteger maximagewidth;
 	@XmlAttribute(required = false)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlSchemaType(name = "NCName")
-	protected String navPosition;
+	protected String navposition;
 	@XmlAttribute(required = false)
-	protected BigInteger stagePadding;
+	protected BigInteger stagepadding;
 	@XmlAttribute(required = false)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlSchemaType(name = "NMTOKEN")
-	protected String textColor;
+	protected String textcolor;
 	@XmlAttribute(required = false)
 	@XmlSchemaType(name = "anySimpleType")
-	protected String thumbPath;
+	protected String thumbpath;
 	@XmlAttribute(required = false)
-	protected BigInteger thumbnailColumns;
+	protected BigInteger thumbnailcolumns;
 	@XmlAttribute(required = false)
-	protected BigInteger thumbnailRows;
+	protected BigInteger thumbnailrows;
 	@XmlAttribute(required = false)
 	@XmlSchemaType(name = "anySimpleType")
 	protected String title;
@@ -138,7 +138,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public String getBackgroundImagePath() {
-		return backgroundImagePath;
+		return backgroundimagepath;
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setBackgroundImagePath(String value) {
-		this.backgroundImagePath = value;
+		this.backgroundimagepath = value;
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public boolean isEnableRightClickOpen() {
-		return enableRightClickOpen;
+		return enablerightclickopen;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setEnableRightClickOpen(boolean value) {
-		this.enableRightClickOpen = value;
+		this.enablerightclickopen = value;
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public String getFrameColor() {
-		return frameColor;
+		return framecolor;
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setFrameColor(String value) {
-		this.frameColor = value;
+		this.framecolor = value;
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public BigInteger getFrameWidth() {
-		return frameWidth;
+		return framewidth;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setFrameWidth(BigInteger value) {
-		this.frameWidth = value;
+		this.framewidth = value;
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public String getImagePath() {
-		return imagePath;
+		return imagepath;
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setImagePath(String value) {
-		this.imagePath = value;
+		this.imagepath = value;
 	}
 
 	/**
@@ -238,7 +238,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public BigInteger getMaxImageHeight() {
-		return maxImageHeight;
+		return maximageheight;
 	}
 
 	/**
@@ -249,7 +249,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setMaxImageHeight(BigInteger value) {
-		this.maxImageHeight = value;
+		this.maximageheight = value;
 	}
 
 	/**
@@ -259,7 +259,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public BigInteger getMaxImageWidth() {
-		return maxImageWidth;
+		return maximagewidth;
 	}
 
 	/**
@@ -270,7 +270,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setMaxImageWidth(BigInteger value) {
-		this.maxImageWidth = value;
+		this.maximagewidth = value;
 	}
 
 	/**
@@ -280,7 +280,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public String getNavPosition() {
-		return navPosition;
+		return navposition;
 	}
 
 	/**
@@ -291,7 +291,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setNavPosition(String value) {
-		this.navPosition = value;
+		this.navposition = value;
 	}
 
 	/**
@@ -301,7 +301,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public BigInteger getStagePadding() {
-		return stagePadding;
+		return stagepadding;
 	}
 
 	/**
@@ -312,7 +312,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setStagePadding(BigInteger value) {
-		this.stagePadding = value;
+		this.stagepadding = value;
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public String getTextColor() {
-		return textColor;
+		return textcolor;
 	}
 
 	/**
@@ -333,7 +333,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setTextColor(String value) {
-		this.textColor = value;
+		this.textcolor = value;
 	}
 
 	/**
@@ -343,7 +343,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public String getThumbPath() {
-		return thumbPath;
+		return thumbpath;
 	}
 
 	/**
@@ -354,7 +354,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setThumbPath(String value) {
-		this.thumbPath = value;
+		this.thumbpath = value;
 	}
 
 	/**
@@ -364,7 +364,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public BigInteger getThumbnailColumns() {
-		return thumbnailColumns;
+		return thumbnailcolumns;
 	}
 
 	/**
@@ -375,7 +375,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setThumbnailColumns(BigInteger value) {
-		this.thumbnailColumns = value;
+		this.thumbnailcolumns = value;
 	}
 
 	/**
@@ -385,7 +385,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public BigInteger getThumbnailRows() {
-		return thumbnailRows;
+		return thumbnailrows;
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class SimpleviewerGallery {
 	 * 
 	 */
 	public void setThumbnailRows(BigInteger value) {
-		this.thumbnailRows = value;
+		this.thumbnailrows = value;
 	}
 
 	/**
