@@ -8,7 +8,7 @@ After you start downloader you have to fill two mandatory fields:
   # URL of Gallery's XML description (don't forget leading 'http://'). If the entered URL is wrong, it will be highlighted with red color. You can find the reason pointing on the text field. The black text color is a sign of a (more or less) proper URL. 
   # Path to your local directory, where downloaded pictures will be stored in
 
-Since version 0.2 you can download images protected by basic access authentication. Just check the flag 'Protected gallery' and enter your credentials.
+Since version 0.2 you can download images protected by [http://en.wikipedia.org/wiki/Basic_access_authentication basic access authentication]. Just check the flag 'Protected gallery' and enter your credentials.
 
 After you entered all required parameters you can click on download button.
 
