@@ -3,12 +3,14 @@
 
 = Introduction =
 
-After you start downloader your have to fill out two mandatory fields:
+After you start downloader you have to fill two mandatory fields:
 
-  # URL of Gallery's XML description (don't forget leading 'http://')
+  # URL of Gallery's XML description (don't forget leading 'http://'). If the entered URL is wrong, it will be highlighted with red color. You can find the reason pointing on the text field. The black text color is a sign of a (more or less) proper URL. 
   # Path to your local directory, where downloaded pictures will be stored in
 
-After you entered both parameters you can click on download button.
+Since version 0.2 you can download images protected by basic access authentication. Just check the flag 'Protected gallery' and enter your credentials.
+
+After you entered all required parameters you can click on download button.
 
 = How to find XML address =
 
@@ -34,6 +36,6 @@ Assume you found an interesting gallery under http://www.topgallery.eu/heide/. V
 
 = Known bugs and open features =
 
-Sadly there is no official XML schema (XSD or DTD) published for !SimpleViewer, also there are several versions of formats, used for gallery's description. That's why only  version 1.9 (?) of !SimpleViewer is supported, but even it can cause parsing errors.
+Sadly there is no official XML schema (XSD or DTD) published for !SimpleViewer, also there are several versions of formats, used for gallery's description. Version 1.9 of !SimpleViewer is definitely supported, another ones might work properly or maybe not.
 
 If there will be interested parties (and some free time) I will make the downloader more universal.
