@@ -57,13 +57,14 @@ public class SwingUI extends JPanel implements DocumentListener,
 	private JTextField usernameTextField;
 	private JLabel lblPassword;
 	private JTextField passwordTextField;
+	private JCheckBox chckbxEnumeratePictures;
 
 	/**
 	 * Create the panel.
 	 */
 	public SwingUI() {
 		setLayout(new MigLayout("", "[300px,grow][100px]",
-				"[15px][][][][][][][][][][][120.00,grow]"));
+				"[15px][][][][][][][][][][][][120.00,grow]"));
 
 		JLabel urlTextFieldLabel = new JLabel(
 				"URL to Simpleviewer Gallery's XML");
@@ -103,29 +104,32 @@ public class SwingUI extends JPanel implements DocumentListener,
 		});
 		add(selectPathButton, "cell 1 3");
 
+		chckbxEnumeratePictures = new JCheckBox("Enumerate output files");
+		add(chckbxEnumeratePictures, "cell 0 4");
+
 		chckbxProtectedGallery = new JCheckBox("Protected gallery");
-		add(chckbxProtectedGallery, "cell 0 4");
+		add(chckbxProtectedGallery, "cell 0 5");
 
 		lblUsername = new JLabel("Username");
-		add(lblUsername, "cell 0 5");
+		add(lblUsername, "cell 0 6");
 
 		usernameTextField = new JTextField();
 		lblUsername.setLabelFor(usernameTextField);
-		add(usernameTextField, "cell 0 6,growx");
+		add(usernameTextField, "cell 0 7,growx");
 		usernameTextField.setColumns(10);
 
 		lblPassword = new JLabel("Password");
-		add(lblPassword, "cell 0 7");
+		add(lblPassword, "cell 0 8");
 
 		passwordTextField = new JPasswordField();
 		lblPassword.setLabelFor(passwordTextField);
-		add(passwordTextField, "cell 0 8,growx");
+		add(passwordTextField, "cell 0 9,growx");
 		passwordTextField.setColumns(10);
 		progressBar = new JProgressBar();
-		add(progressBar, "cell 0 9,growx");
+		add(progressBar, "cell 0 10,growx");
 
 		statusLabel = new JLabel("");
-		add(statusLabel, "cell 1 9");
+		add(statusLabel, "cell 1 10");
 
 		downloadButton = new JButton("Download");
 		downloadButton.setEnabled(false);
@@ -144,9 +148,11 @@ public class SwingUI extends JPanel implements DocumentListener,
 								new Downloader(xmlUrl, downloadDirectory,
 										usernameTextField.getText(),
 										passwordTextField.getText(),
+										chckbxEnumeratePictures.isSelected(),
 										SwingUI.this);
 							} else {
 								new Downloader(xmlUrl, downloadDirectory,
+										chckbxEnumeratePictures.isSelected(),
 										SwingUI.this);
 							}
 						}
@@ -157,11 +163,11 @@ public class SwingUI extends JPanel implements DocumentListener,
 				}
 			}
 		});
-		add(downloadButton, "cell 0 10");
+		add(downloadButton, "cell 0 11");
 
 		loggingArea = new JTextArea();
 		loggingArea.setEditable(false);
-		add(new JScrollPane(loggingArea), "cell 0 11,grow");
+		add(new JScrollPane(loggingArea), "cell 0 12,grow");
 		initDataBindings();
 
 	}

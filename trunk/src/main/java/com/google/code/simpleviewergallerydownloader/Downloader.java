@@ -41,12 +41,13 @@ public class Downloader {
 	 * @param listener
 	 */
 	public Downloader(URL xmlUrl, File downloadDirectory,
-			IDownloaderListener listener) {
-		this(xmlUrl, downloadDirectory, null, null, listener);
+			boolean enumeratePictures, IDownloaderListener listener) {
+		this(xmlUrl, downloadDirectory, null, null, enumeratePictures, listener);
 	}
 
 	public Downloader(URL xmlUrl, File downloadDirectory, String username,
-			String password, IDownloaderListener listener) {
+			String password, boolean enumeratePictures,
+			IDownloaderListener listener) {
 
 		if (xmlUrl == null || downloadDirectory == null || listener == null) {
 			throw new IllegalArgumentException(
@@ -85,6 +86,8 @@ public class Downloader {
 		}
 
 		listener.setTotalPicturesCount(images.size());
+		String prefixTemplate = "%0" + String.valueOf(images.size()).length()
+				+ "d_";
 
 		for (int index = 0; index < images.size(); index++) {
 			Image each = images.get(index);
@@ -100,7 +103,11 @@ public class Downloader {
 
 			listener.setNowDownloading(each.getFilename(), index);
 
-			downloadImage(each.getFilename(), imageURLs, downloadDirectory);
+			String filenameStorePrefix = enumeratePictures ? String.format(
+					prefixTemplate, index + 1) : "";
+
+			downloadImage(each.getFilename(), filenameStorePrefix, imageURLs,
+					downloadDirectory);
 		}
 	}
 
@@ -154,8 +161,8 @@ public class Downloader {
 		return imageUrls;
 	}
 
-	private void downloadImage(String filename, List<URL> imageURLs,
-			File downloadDirectory) {
+	private void downloadImage(String filename, String filenameStorePrefix,
+			List<URL> imageURLs, File downloadDirectory) {
 		InputStream imageInputSteam = null;
 		String properURL = null;
 
@@ -179,7 +186,8 @@ public class Downloader {
 		}
 
 		FileOutputStream fileOutputStream = null;
-		File outputFile = new File(downloadDirectory, filename);
+		File outputFile = new File(downloadDirectory, filenameStorePrefix
+				+ filename);
 		try {
 			fileOutputStream = new FileOutputStream(outputFile);
 		} catch (FileNotFoundException e) {
