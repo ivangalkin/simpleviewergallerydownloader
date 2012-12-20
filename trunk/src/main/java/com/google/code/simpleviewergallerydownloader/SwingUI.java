@@ -144,6 +144,7 @@ public class SwingUI extends JPanel implements DocumentListener,
 							.getText());
 					new Thread(new Runnable() {
 						public void run() {
+							downloadButton.setEnabled(false);
 							if (chckbxProtectedGallery.isSelected()) {
 								new Downloader(xmlUrl, downloadDirectory,
 										usernameTextField.getText(),
@@ -207,9 +208,20 @@ public class SwingUI extends JPanel implements DocumentListener,
 	public void removeUpdate(DocumentEvent e) {
 		checkInput();
 	}
+	
+	@Override
+	public void onDownloadFinished() {
+		downloadButton.setEnabled(true);
+	}
 
 	@Override
-	public void onDownloadingError(String errorMessage) {
+	public void onDownloadInfo(String infoMessage) {
+		loggingArea.append(infoMessage);
+		loggingArea.append("\n");
+	}
+
+	@Override
+	public void onDownloadError(String errorMessage) {
 		loggingArea.append(errorMessage);
 		loggingArea.append("\n");
 	}
