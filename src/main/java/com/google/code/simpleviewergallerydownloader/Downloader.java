@@ -50,6 +50,9 @@ public class Downloader {
 			IDownloaderListener listener) {
 
 		if (xmlUrl == null || downloadDirectory == null || listener == null) {
+			if (listener != null) {
+				listener.onDownloadFinished();
+			}
 			throw new IllegalArgumentException(
 					"Wrong initialization of Downloader object");
 		}
@@ -62,8 +65,9 @@ public class Downloader {
 		try {
 			xmlContent = transport.download(xmlUrl);
 		} catch (DownloaderTransportException e) {
-			this.listener.onDownloadingError("Unable to download XML file: "
+			this.listener.onDownloadError("Unable to download XML file: "
 					+ ExceptionUtils.getMessage(e));
+			this.listener.onDownloadFinished();
 			return;
 		}
 		SimpleviewerGallery gallery = null;
@@ -71,8 +75,9 @@ public class Downloader {
 			gallery = new DownloaderXMLParser()
 					.getSimpleviewerGallery(xmlContent);
 		} catch (DownloaderParseException e1) {
-			listener.onDownloadingError("Unable to parse XML: "
+			this.listener.onDownloadError("Unable to parse XML: "
 					+ ExceptionUtils.getMessage(e1));
+			this.listener.onDownloadFinished();
 			return;
 		}
 
@@ -81,7 +86,8 @@ public class Downloader {
 		List<Image> images = gallery.getImage();
 
 		if (images == null || images.size() == 0) {
-			listener.onDownloadingError("List of images is empty");
+			this.listener.onDownloadError("List of images is empty");
+			this.listener.onDownloadFinished();
 			return;
 		}
 
@@ -95,8 +101,8 @@ public class Downloader {
 			List<URL> imageURLs = getImageUrls(urlPath, imagePath, each);
 
 			if (imageURLs.isEmpty()) {
-				listener
-						.onDownloadingError("Could not create a well-formed URL for image "
+				this.listener
+						.onDownloadError("Could not create a well-formed URL for image "
 								+ each.getFilename());
 				continue;
 			}
@@ -109,6 +115,7 @@ public class Downloader {
 			downloadImage(each.getFilename(), filenameStorePrefix, imageURLs,
 					downloadDirectory);
 		}
+		this.listener.onDownloadFinished();
 	}
 
 	/**
@@ -176,11 +183,10 @@ public class Downloader {
 		}
 
 		if (properURL != null) {
-			this.listener.onDownloadingError("File was found under "
-					+ properURL);
+			this.listener.onDownloadInfo("File was found under " + properURL);
 		} else {
 			this.listener
-					.onDownloadingError("Could not build an appropriated URL for file "
+					.onDownloadError("Could not build an appropriated URL for file "
 							+ filename + " or network error");
 			return;
 		}
@@ -191,7 +197,7 @@ public class Downloader {
 		try {
 			fileOutputStream = new FileOutputStream(outputFile);
 		} catch (FileNotFoundException e) {
-			this.listener.onDownloadingError("Unable to create output file "
+			this.listener.onDownloadError("Unable to create output file "
 					+ outputFile.getAbsolutePath() + ": "
 					+ ExceptionUtils.getMessage(e));
 			IOUtils.closeQuietly(fileOutputStream);
@@ -202,7 +208,7 @@ public class Downloader {
 			IOUtils.copy(imageInputSteam, fileOutputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
-			this.listener.onDownloadingError("Error during reading from "
+			this.listener.onDownloadError("Error during reading from "
 					+ properURL + " or writing to "
 					+ outputFile.getAbsolutePath() + ": "
 					+ ExceptionUtils.getMessage(e));

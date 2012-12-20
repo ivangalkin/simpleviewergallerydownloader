@@ -12,6 +12,9 @@ public interface IDownloaderListener {
 
 	public void setNowDownloading(String image, int number);
 
-	public void onDownloadingError(String errorMessage);
+	public void onDownloadError(String errorMessage);
 
+	public void onDownloadInfo(String infoMessage);
+
+	public void onDownloadFinished();
 }
