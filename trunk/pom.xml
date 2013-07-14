@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.google.code</groupId>
 	<artifactId>simpleviewergallerydownloader</artifactId>
-	<version>0.22</version>
+	<version>0.3</version>
 	<build>
 		<plugins>
 			<plugin>

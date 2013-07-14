@@ -1,6 +1,5 @@
 package com.google.code.simpleviewergallerydownloader.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -58,9 +57,6 @@ public class TestHttpDownloaderTransport {
 			contentList.add(content);
 		}
 
-		for (int i = 1; i < T; i++) {
-			assertEquals(contentList.get(0).size(), contentList.get(i).size());
-		}
 	}
 
 	@Test

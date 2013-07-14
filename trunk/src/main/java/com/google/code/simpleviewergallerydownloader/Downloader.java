@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -82,8 +83,9 @@ public class Downloader {
 		}
 
 		String urlPath = getGaleryPath(xmlUrl);
+		System.out.println("URL PATH = " + urlPath);
 		String imagePath = gallery.getImagePath();
-		List<Image> images = gallery.getImage();
+		List<Image> images = gallery.getImages();
 
 		if (images == null || images.size() == 0) {
 			this.listener.onDownloadError("List of images is empty");
@@ -103,16 +105,18 @@ public class Downloader {
 			if (imageURLs.isEmpty()) {
 				this.listener
 						.onDownloadError("Could not create a well-formed URL for image "
-								+ each.getFilename());
+								+ each.getImageURL());
 				continue;
 			}
 
-			listener.setNowDownloading(each.getFilename(), index);
+			listener.setNowDownloading(each.getImageURL(), index);
 
 			String filenameStorePrefix = enumeratePictures ? String.format(
 					prefixTemplate, index + 1) : "";
 
-			downloadImage(each.getFilename(), filenameStorePrefix, imageURLs,
+			String filename = FilenameUtils.getName(each.getImageURL());
+
+			downloadImage(filename, filenameStorePrefix, imageURLs,
 					downloadDirectory);
 		}
 		this.listener.onDownloadFinished();
@@ -132,37 +136,24 @@ public class Downloader {
 
 		List<URL> imageUrls = new LinkedList<URL>();
 		if (imagePath == null || imagePath.isEmpty()) {
-			try {
-				// 1. image path is not given, filename is relative to urlPath
-				URL url = DownloaderUtils.getURL(urlPath, image.getFilename());
-				imageUrls.add(url);
-			} catch (MalformedURLException e) {
-			}
-
-			try {
-				// 2. image path is not given, filename is relative to default
-				// forlder "images"
-				URL url = DownloaderUtils.getURL(urlPath, "images", image
-						.getFilename());
-				imageUrls.add(url);
-			} catch (MalformedURLException e) {
-			}
+			// 1. image path is not given, filename is relative to urlPath
+			DownloaderUtils.addURLIfWellformed(imageUrls, urlPath,
+					image.getImageURL());
+			// 2. image path is not given, filename is relative to default
+			// folder "images"
+			DownloaderUtils.addURLIfWellformed(imageUrls, urlPath, "images",
+					image.getImageURL());
 		} else {
-			try {
-				// 3. image path is given, it is relative
-				URL url = DownloaderUtils.getURL(urlPath, imagePath, image
-						.getFilename());
-				imageUrls.add(url);
-			} catch (MalformedURLException e) {
-			}
+			// 3. image path is given, it is relative
+			DownloaderUtils.addURLIfWellformed(imageUrls, urlPath, imagePath,
+					image.getImageURL());
+			// 4. image path is given, it is absolute
+			DownloaderUtils.addURLIfWellformed(imageUrls, imagePath,
+					image.getImageURL());
 
-			try {
-				// 4. image path is given, it is absolute
-				URL url = DownloaderUtils
-						.getURL(imagePath, image.getFilename());
-				imageUrls.add(url);
-			} catch (MalformedURLException e) {
-			}
+			// 5. image path is given, but it is ignored
+			DownloaderUtils.addURLIfWellformed(imageUrls, urlPath,
+					image.getImageURL());
 		}
 
 		return imageUrls;
@@ -226,6 +217,7 @@ public class Downloader {
 	 * @return
 	 */
 	protected String getGaleryPath(URL xmlUrl) {
+
 		File file = new File(xmlUrl.getFile());
 
 		String urlRepresentation = xmlUrl.toString();
