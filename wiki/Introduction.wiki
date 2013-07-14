@@ -36,6 +36,6 @@ Assume you found an interesting gallery under http://www.topgallery.eu/heide/. V
 
 = Known bugs and open features =
 
-Sadly there is no official XML schema (XSD or DTD) published for !SimpleViewer, also there are several versions of formats, used for gallery's description. Version 1.9 of !SimpleViewer is definitely supported, another ones might work properly or maybe not.
+Sadly there is no official XML schema (XSD or DTD) published for !SimpleViewer, also there are several versions of formats, used for gallery's description. From this reason not all versions of !SimpleViewer are supported. Please try out to download the gallery and create an issue if there were some errors.
 
 If there will be interested parties (and some free time) I will make the downloader more universal.
