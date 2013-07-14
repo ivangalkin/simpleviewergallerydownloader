@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simpleviewergallery galleryStyle="MODERN" title="Hochzeitsgalerie" textColor="#fceddb" frameColor="fceddb" frameWidth="3" thumbPosition="left" thumbColumns="3" thumbRows="3" showOpenButton="TRUE" showFullscreenButton="TRUE" maxImageWidth="640" maxImageHeight="640" useFlickr="false" flickrUserName="" flickrTags="" languageCode="AUTO" languageList="" imagePath="images/" thumbPath="thumbs/">
+
+<image imageURL="images/luftballonaktion3.jpg" thumbURL="thumbs/luftballonaktion3.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/hochzeitsf_green_schnede11.jpg" thumbURL="thumbs/hochzeitsf_green_schnede11.jpg" linkURL="" linkTarget="">
+	<caption>Im Park</caption>	
+</image>
+<image imageURL="images/hochzeitsf_green_schnede05.jpg" thumbURL="thumbs/hochzeitsf_green_schnede05.jpg" linkURL="" linkTarget="">
+	<caption>Im Park</caption>	
+</image>
+<image imageURL="images/hochzeitsf_green_schnede08.jpg" thumbURL="thumbs/hochzeitsf_green_schnede08.jpg" linkURL="" linkTarget="">
+	<caption>Auf der Terrasse</caption>	
+</image>
+<image imageURL="images/das_paar.jpg" thumbURL="thumbs/das_paar.jpg" linkURL="" linkTarget="">
+	<caption>Glückliches Paar</caption>	
+</image>
+	<image imageURL="images/konzert_im_park.jpg" thumbURL="thumbs/konzert_im_park.jpg" linkURL="" linkTarget="">
+	<caption>Konzert im Park</caption>	
+</image>
+<image imageURL="images/empfang_allwarth.jpg" thumbURL="thumbs/empfang_allwarth.jpg" linkURL="http://www.simpleviewer.net" linkTarget="_blank">
+	<caption>Empfang auf der Terrasse</caption>	
+</image>
+<image imageURL="images/balkon_nah_mitpaar1.jpg" thumbURL="thumbs/balkon_nah_mitpaar1.jpg" linkURL="" linkTarget="">
+	<caption>Das Paar grüßt vom Balkon</caption>	
+</image>
+<image imageURL="images/inden_himmel_entschwebt.jpg" thumbURL="thumbs/inden_himmel_entschwebt.jpg" linkURL="" linkTarget="">
+	<caption>In den Himmel entschwebt</caption>	
+</image>
+<image imageURL="images/tafel.jpg" thumbURL="thumbs/tafel.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/ho_torte1.jpg" thumbURL="thumbs/ho_torte1.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/festl_tafel_mitpaar.jpg" thumbURL="thumbs/festl_tafel_mitpaar.jpg" linkURL="" linkTarget="">
+	<caption>Festliche Tafel</caption>	
+</image>
+<image imageURL="images/schnede419.jpg" thumbURL="thumbs/schnede419.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/rundetische2.jpg" thumbURL="thumbs/rundetische2.jpg" linkURL="" linkTarget="">
+	<caption>Eingedeckt mit runden Tischen</caption>	
+</image>
+<image imageURL="images/schnede383.jpg" thumbURL="thumbs/schnede383.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede356.jpg" thumbURL="thumbs/schnede356.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede370.jpg" thumbURL="thumbs/schnede370.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede371.jpg" thumbURL="thumbs/schnede371.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede387.jpg" thumbURL="thumbs/schnede387.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/deko1.jpg" thumbURL="thumbs/deko1.jpg" linkURL="" linkTarget="">
+	<caption>Gedeckter Tisch</caption>	
+</image>
+<image imageURL="images/buffet2_jan09.jpg" thumbURL="thumbs/buffet2_jan09.jpg" linkURL="" linkTarget="">
+	<caption>Buffet</caption>	
+</image>
+<image imageURL="images/schnede406.jpg" thumbURL="thumbs/schnede406.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede404.jpg" thumbURL="thumbs/schnede404.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede400.jpg" thumbURL="thumbs/schnede400.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede411.jpg" thumbURL="thumbs/schnede411.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede408.jpg" thumbURL="thumbs/schnede408.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/rucolascampis.jpg" thumbURL="thumbs/rucolascampis.jpg" linkURL="" linkTarget="">
+	<caption>Rucolascampis</caption>	
+</image>
+<image imageURL="images/schnede422.jpg" thumbURL="thumbs/schnede422.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/schnede393.jpg" thumbURL="thumbs/schnede393.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/hochzeitssuite.jpg" thumbURL="thumbs/hochzeitssuite.jpg" linkURL="" linkTarget="">
+	<caption>Die Hochzeitssuite</caption>	
+</image>
+<image imageURL="images/spielzimmer.jpg" thumbURL="thumbs/spielzimmer.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+<image imageURL="images/discofeaver2.jpg" thumbURL="thumbs/discofeaver2.jpg" linkURL="" linkTarget="">
+	<caption>Discofeaver</caption>	
+</image>
+<image imageURL="images/schnede_bei_nacht1.jpg" thumbURL="thumbs/schnede_bei_nacht1.jpg" linkURL="" linkTarget="">
+	<caption/>	
+</image>
+</simpleviewergallery>

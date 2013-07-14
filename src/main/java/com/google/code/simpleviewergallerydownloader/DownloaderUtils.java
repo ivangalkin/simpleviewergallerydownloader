@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,23 +39,32 @@ public class DownloaderUtils {
 		try {
 			String decodedURL = URLDecoder.decode(input, "UTF-8");
 			URL url = new URL(decodedURL);
-			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url
-					.getHost(), url.getPort(), url.getPath(), url.getQuery(),
-					url.getRef());
+			URI uri = new URI(url.getProtocol(), url.getUserInfo(),
+					url.getHost(), url.getPort(), url.getPath(),
+					url.getQuery(), url.getRef());
 
 			return uri.toURL();
 
 		} catch (URISyntaxException uriException) {
-			throw new MalformedURLException(ExceptionUtils
-					.getMessage(uriException));
+			throw new MalformedURLException(
+					ExceptionUtils.getMessage(uriException));
 		} catch (UnsupportedEncodingException encodingException) {
-			throw new MalformedURLException(ExceptionUtils
-					.getMessage(encodingException));
+			throw new MalformedURLException(
+					ExceptionUtils.getMessage(encodingException));
 		}
 	}
 
 	public static URL getURL(String... parts) throws MalformedURLException {
 		return getURL(joinURL(parts));
+	}
+
+	public static void addURLIfWellformed(Collection<URL> collection,
+			String... parts) {
+		try {
+			URL url = getURL(parts);
+			collection.add(url);
+		} catch (MalformedURLException e) {
+		}
 	}
 
 }
