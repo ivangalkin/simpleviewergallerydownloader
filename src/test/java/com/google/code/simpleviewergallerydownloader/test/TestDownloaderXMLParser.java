@@ -151,5 +151,23 @@ public class TestDownloaderXMLParser {
 				.getImages().get(0).getImageURL());
 	}
 		
+	/**
+	 * http://www.photo-art.asia/mona/gallery.xml
+	 */
+	@Test
+	public void testXMLParse8() throws DownloaderParseException {
+		InputStream is = TestDownloaderXMLParser.class
+				.getClassLoader()
+				.getResourceAsStream(
+						"com/google/code/simpleviewergallerydownloader/test/gallery8.xml");
+		assertNotNull(is);
+		SimpleviewerGallery gallery = new DownloaderXMLParser()
+				.getSimpleviewerGallery(is);
+		assertEquals(30, gallery.getImages().size());
+
+		assertEquals("", gallery.getImagePath());
+		assertEquals("images/01.jpg", gallery
+				.getImages().get(0).getImageURL());
+	}
 
 }
