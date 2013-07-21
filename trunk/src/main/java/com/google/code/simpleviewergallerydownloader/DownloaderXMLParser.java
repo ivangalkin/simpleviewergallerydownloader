@@ -2,6 +2,8 @@ package com.google.code.simpleviewergallerydownloader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,15 +38,18 @@ public class DownloaderXMLParser {
 		}
 	}
 
-	private static final String XPATH_IMAGEPATH = "/simpleviewergallery/@imagepath";
-	private static final String XPATH_IMAGES = "/simpleviewergallery/image";
+	private static final String XPATH_ROOT_SIMPLEVIEWER = "/simpleviewergallery";
+	private static final String XPATH_ROOT_AUTOVIEWER = "/gallery";
+	private static final String XPATH_IMAGEPATH = "./@imagepath";
+	private static final String XPATH_IMAGES = "./image";
 	private static final String XPATH_FILENAME = "./filename/text()";
 	private static final String XPATH_IMAGEURL = "./@imageurl";
+	private static final String XPATH_URL = "./url/text()";
 
+	private final List<XPathExpression> xPathRoots;
 	private final XPathExpression xPathImages;
 	private final XPathExpression xPathImagePath;
-	private final XPathExpression xPathFilename;
-	private final XPathExpression xPathImageURL;
+	private final List<XPathExpression> xPathURLs;
 
 	private final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
 			.newInstance();
@@ -52,16 +57,46 @@ public class DownloaderXMLParser {
 	private final XPathFactory xPathFactory = XPathFactory.newInstance();
 
 	public DownloaderXMLParser() throws DownloaderParseException {
-		XPath xPath = xPathFactory.newXPath();
+		final XPath xPath = xPathFactory.newXPath();
 
 		try {
+			xPathRoots = new ArrayList<XPathExpression>() {
+				private static final long serialVersionUID = 5816806284340915249L;
+				{
+					// Simpleviewer
+					add(xPath.compile(XPATH_ROOT_SIMPLEVIEWER));
+					// Autoviewer
+					add(xPath.compile(XPATH_ROOT_AUTOVIEWER));
+				}
+			};
 			xPathImages = xPath.compile(XPATH_IMAGES);
 			xPathImagePath = xPath.compile(XPATH_IMAGEPATH);
-			xPathFilename = xPath.compile(XPATH_FILENAME);
-			xPathImageURL = xPath.compile(XPATH_IMAGEURL);
+			xPathURLs = new ArrayList<XPathExpression>() {
+				private static final long serialVersionUID = -7787794328029149578L;
+				{
+					// Simpleviewer Gallery version 1.x
+					add(xPath.compile(XPATH_FILENAME));
+					// Simpleviewer Gallery version 2.x
+					add(xPath.compile(XPATH_IMAGEURL));
+					// Autoviewer
+					add(xPath.compile(XPATH_URL));
+				}
+			};
 		} catch (XPathExpressionException e) {
 			throw new DownloaderParseException(e);
 		}
+	}
+
+	private Node getFirstValidEvaluation(Node node,
+			List<XPathExpression> expressions) throws XPathExpressionException {
+		Node evaluationResult = null;
+		for (XPathExpression each : expressions) {
+			evaluationResult = (Node) each.evaluate(node, XPathConstants.NODE);
+			if (evaluationResult != null) {
+				return evaluationResult;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -88,17 +123,25 @@ public class DownloaderXMLParser {
 
 	public SimpleviewerGallery parse(InputStream is) throws DOMException,
 			XPathExpressionException, ParserConfigurationException,
-			SAXException, IOException {
+			SAXException, IOException, DownloaderParseException {
 		DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
 
 		Document doc = builder.parse(is);
 		prepareDocument(doc, doc);
 
+		// root node
+
+		Node rootNode = getFirstValidEvaluation(doc, xPathRoots);
+		if (rootNode == null) {
+			throw new DownloaderParseException(
+					"Unknown XML format: Root element has to be <simpleviewergallery> or <gallery> (case insensitive)!");
+		}
+
 		SimpleviewerGallery gallery = new SimpleviewerGallery();
 
 		// image path
 
-		Node imagePathNode = (Node) xPathImagePath.evaluate(doc,
+		Node imagePathNode = (Node) xPathImagePath.evaluate(rootNode,
 				XPathConstants.NODE);
 		String imagePath = (imagePathNode == null) ? "" : imagePathNode
 				.getNodeValue();
@@ -106,7 +149,7 @@ public class DownloaderXMLParser {
 
 		// images
 
-		NodeList imageNodes = (NodeList) xPathImages.evaluate(doc,
+		NodeList imageNodes = (NodeList) xPathImages.evaluate(rootNode,
 				XPathConstants.NODESET);
 
 		if (imageNodes == null) {
@@ -114,24 +157,13 @@ public class DownloaderXMLParser {
 		}
 
 		for (int i = 0; i < imageNodes.getLength(); i++) {
-			Node currentResult = imageNodes.item(i);
+			Node currentImageNode = imageNodes.item(i);
+			Node currentImageURLNode = getFirstValidEvaluation(
+					currentImageNode, xPathURLs);
 
-			Node imageURLNode = (Node) xPathImageURL.evaluate(currentResult,
-					XPathConstants.NODE);
-			Node fileNameNode = (Node) xPathFilename.evaluate(currentResult,
-					XPathConstants.NODE);
-
-			if (imageURLNode != null) {
-				// Simpleviewer Gallery version 1.x
-				Image image = new Image(imageURLNode.getNodeValue());
+			if (currentImageURLNode != null) {
+				Image image = new Image(currentImageURLNode.getNodeValue());
 				gallery.addImage(image);
-			} else if (fileNameNode != null) {
-				// Simpleviewer Gallery version 2.x
-				Image image = new Image(fileNameNode.getNodeValue());
-				gallery.addImage(image);
-			} else {
-				// Unknown version
-				continue;
 			}
 		}
 

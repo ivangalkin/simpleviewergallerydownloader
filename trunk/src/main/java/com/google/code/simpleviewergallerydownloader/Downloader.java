@@ -83,7 +83,6 @@ public class Downloader {
 		}
 
 		String urlPath = getGaleryPath(xmlUrl);
-		System.out.println("URL PATH = " + urlPath);
 		String imagePath = gallery.getImagePath();
 		List<Image> images = gallery.getImages();
 
